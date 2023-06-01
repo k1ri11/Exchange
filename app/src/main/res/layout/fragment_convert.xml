@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".presentation.fragments.ConvertFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/current_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="1 RUB = 123 AED" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/rub_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:inputType="number"
+        android:hint="@string/rub" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/rate_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="rate" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
