@@ -10,5 +10,5 @@ interface ExchangeApi {
     suspend fun getRates(
         @Query("base") baseRate: String,
         @Query("places") places: Int,
-        ): Response<RateResponse>
+        ): Response<RateInfoResponse>
 }

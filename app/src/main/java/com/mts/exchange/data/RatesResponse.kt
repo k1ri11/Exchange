@@ -3,7 +3,7 @@ package com.mts.exchange.data
 
 import com.google.gson.annotations.SerializedName
 
-data class Rates(
+data class RatesResponse(
     @SerializedName("AED")
     val aED: Double,
     @SerializedName("AFN")
@@ -51,23 +51,37 @@ data class Rates(
     @SerializedName("BTN")
     val bTN: Double,
     @SerializedName("BWP")
-    val bWP: Double,
-    @SerializedName("BYN")
-    val bYN: Double,
-    @SerializedName("BZD")
-    val bZD: Double,
-    @SerializedName("CAD")
-    val cAD: Double,
-    @SerializedName("CDF")
-    val cDF: Double,
-    @SerializedName("CHF")
-    val cHF: Double,
-    @SerializedName("CLF")
-    val cLF: Int,
-    @SerializedName("CLP")
-    val cLP: Double,
-    @SerializedName("CNH")
-    val cNH: Double,
-    @SerializedName("CNY")
-    val cNY: Double,
+    val bWP: Double
 )
+
+fun RatesResponse.getRatesNames(): List<String> {
+    val fields = RatesResponse::class.java.declaredFields
+    return fields.map { it.name.uppercase() }
+}
+
+fun RatesResponse.getRateByName(rateName: String): Double = when (rateName) {
+    "AED" -> this.aED
+    "AFN" -> this.aFN
+    "ALL" -> this.aLL
+    "AMD" -> this.aMD
+    "ANG" -> this.aNG
+    "AOA" -> this.aOA
+    "ARS" -> this.aRS
+    "AUD" -> this.aUD
+    "AZN" -> this.aZN
+    "BAM" -> this.bAM
+    "BBD" -> this.bBD
+    "BDT" -> this.bDT
+    "BGN" -> this.bGN
+    "BHD" -> this.bHD
+    "BIF" -> this.bIF
+    "BMD" -> this.bMD
+    "BND" -> this.bND
+    "BOB" -> this.bOB
+    "BRL" -> this.bRL
+    "BSD" -> this.bSD
+    "BTN" -> this.bTN
+    "BWP" -> this.bWP
+    else -> 0.0
+
+}

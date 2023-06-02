@@ -2,4 +2,5 @@
     <string name="app_name">exchange</string>
     <string name="rub">RUB</string>
     <string name="current_rate">1 RUB = %1$f %2$s</string>
+    <string name="no_connection">Нет интернет соединения</string>
 </resources>

@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="8dp"
+    android:paddingTop="8dp"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
+    android:background="@color/main_bg"
     tools:context=".presentation.fragments.ConvertFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -15,19 +16,34 @@
         android:textSize="20sp"
         tools:text="1 RUB = 123 AED" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/rub_input"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="number"
-        android:hint="@string/rub" />
+        android:hint="@string/rub">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/rate_input"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rub_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rate_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="rate" />
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rate_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

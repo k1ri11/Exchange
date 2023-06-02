@@ -1,13 +1,14 @@
-package com.mts.exchange.presentation
+package com.mts.exchange.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.mts.exchange.R
-import com.mts.exchange.data.Rates
+import com.mts.exchange.data.RateInfoResponse
+import com.mts.exchange.data.getRateByName
 import com.mts.exchange.databinding.ItemRateBinding
 import com.mts.exchange.presentation.fragments.RatesFragmentDirections
 import javax.inject.Inject
@@ -16,14 +17,14 @@ class RateAdapter @Inject constructor(
     private val fragment: Fragment
 ) : RecyclerView.Adapter<RateAdapter.RateViewHolder>() {
 
-    var ratesList: List<Rates> = emptyList()
+    lateinit var rate: RateInfoResponse
+    var ratesNames: List<String> = emptyList()
         set(newValue) {
+            val diffCallback = DiffUtilRateCallback(field, newValue)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
             field = newValue
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
-
-    var ratesListTest: List<Pair<String, Float>> =
-        listOf(Pair("sns", 0.24f), Pair("sns", 0.24f), Pair("sns", 0.24f), Pair("sns", 0.24f))
 
     inner class RateViewHolder(val binding: ItemRateBinding) : ViewHolder(binding.root)
 
@@ -33,17 +34,21 @@ class RateAdapter @Inject constructor(
         return RateViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = ratesListTest.size
+    override fun getItemCount(): Int = ratesNames.size
 
     override fun onBindViewHolder(holder: RateViewHolder, position: Int) {
-        val currentItem = ratesListTest[position]
+        val currentItem = ratesNames[position]
         holder.binding.apply {
+            val rateValue = rate.ratesResponse.getRateByName(currentItem)
             root.setOnClickListener {
-                val action = RatesFragmentDirections.actionRatesFragmentToConvertFragment(currentItem.first, currentItem.second)
+                val action = RatesFragmentDirections.actionRatesFragmentToConvertFragment(
+                    rate= rateValue.toFloat(),
+                    rateName = currentItem
+                )
                 findNavController(fragment).navigate(action)
             }
-            rateName.text = currentItem.first
-            rateCost.text = currentItem.second.toString()
+            rateName.text = currentItem
+            rateCost.text = rateValue.toString()
         }
     }
 }
